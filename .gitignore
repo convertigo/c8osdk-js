@@ -1,0 +1,55 @@
+#################
+## Misc
+#################
+**/.DS_Store
+package-lock.json
+nbproject
+manifest.mf
+build.xml
+node_modules/*
+!config/*
+!karma.conf.js
+!webpack.config.js
+!make.js
+!examples/**/*.js
+coverage
+*.metadata.json
+bundles
+src/*.js
+src/c8o/*.js
+src/c8o/Exception/*.js
+tests/*.js
+*.map
+*.d.ts
+*.ngsummary.json
+# Node generated files
+node_modules
+debug.log
+npm-debug.log
+# Typings generated files
+typings
+doc/*
+
+#################
+## JetBrains
+#################
+.idea
+.project
+.settings
+
+############
+## Windows
+############
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+############
+## Mac
+############
+
+# Mac crap
+.DS_Store
