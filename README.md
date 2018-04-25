@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/convertigo/c8osdk-vuejs.svg?branch=master)](https://travis-ci.org/convertigo/c8osdk-vuejs) [![npm version](https://img.shields.io/npm/v/c8osdkvuejs.svg)](https://www.npmjs.com/package/c8osdkvuejs)
+[![Build Status](https://travis-ci.org/convertigo/c8osdk-vuejs.svg?branch=master)](https://travis-ci.org/convertigo/c8osdk-vuejs) [![npm version](https://img.shields.io/npm/v/c8osdkvuejs.svg)](https://www.npmjs.com/package/c8osdkvuejs)
 
 # C8oSDKVueJS #
 
