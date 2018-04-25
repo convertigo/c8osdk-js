@@ -39,10 +39,10 @@ A C8oSettings can be instantiated from an existing C8oSettings or C8o instance.
 
 In order to finish the c8o initialization you must use init method from c8o object with a c8oSettings parameters
 
-    import { C8o, C8oSettings } from "c8osdkvuejs";
+    import { C8o, C8oSettings } from "c8osdkvuejs"
     …
     // The only way
-    let settings: C8oSettings = new C8oSettings();
+    let settings: C8oSettings = new C8oSettings()
     settings
           .setEndPoint("https://demo.convertigo.net/cems/projects/sampleMobileCtfGallery")
           .setDefaultDatabaseName("mydb_fullsync")
