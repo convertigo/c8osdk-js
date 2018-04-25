@@ -11,6 +11,8 @@
     "tsconfig.json"
   ],
   "scripts": {
+    "publish:beta": "npm publish --tag beta",
+    "publish": "npm publish",
     "test": "karma start",
     "test-watch": "karma start --singleRun=false --autoWatch=true --captureExceptions",
     "clean": "rimraf bundles coverage src/**/*.d.ts src/**/*.metadata.json src/**/*.js src/**/*.js.map src/**/*.ngsummary.json src/index.d.ts src/index.js src/index.js.map",

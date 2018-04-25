@@ -12,7 +12,6 @@ notifications:
   email:
     recipients:
       - charlesg@convertigo.com
-      - nicolasa@convertigo.com
     on_success: change # default: change
     on_failure: change # default: always
 
