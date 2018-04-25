@@ -1,17 +1,8 @@
-import {C8oCore, C8oLogger, C8oSettings, C8oException, C8oExceptionMessage, C8oFullSyncCbl, C8oFullSync} from "c8osdkjscore";
+import axios, { AxiosAdapter, AxiosError, AxiosInstance, AxiosRequestConfig,
+    AxiosResponse, Cancel, Canceler, CancelToken, CancelTokenSource} from "axios/index";
+import {C8oCore, C8oException, C8oExceptionMessage, C8oFullSyncCbl, C8oLogger, C8oSettings} from "c8osdkjscore";
 import {Observable} from "rxjs/Observable";
 import {C8oHttpInterface} from "./c8oHttpInterface.service";
-import axios, {
-    AxiosRequestConfig,
-    AxiosResponse,
-    AxiosError,
-    AxiosInstance,
-    AxiosAdapter,
-    Cancel,
-    CancelToken,
-    CancelTokenSource,
-    Canceler
-} from "axios/index";
 
 export class C8o extends C8oCore {
 
@@ -36,31 +27,28 @@ export class C8o extends C8oCore {
             this.promiseConstructor = new Promise((resolve) => {
                 // if project is running into web browser served by convertigo
                 // get the url from window.location
-                if (window.location.href.startsWith("http") && window.location.href.indexOf("/DisplayObjects") != -1) {
-                    let n = window.location.href.indexOf("/DisplayObjects");
+                if (window.location.href.startsWith("http") && window.location.href.indexOf("/DisplayObjects") !== -1) {
+                    const n = window.location.href.indexOf("/DisplayObjects");
                     this.endpoint = window.location.href.substring(0, n);
                     resolve();
-                }
-                // else if project is running on device or serve by ionic serve
-                // get the uri from env.json
-                else {
-                    let uri ="";
-                    if(window.location.href.startsWith("file://")){
-                        uri = (window.location.href.substring(0, window.location.href.indexOf("/index.html"))) + "/env.json"
-                    }
-                    else{
+                } else {
+                    let uri = "";
+                    if (window.location.href.startsWith("file://")) {
+                        uri = (window.location.href.substring(0,
+                            window.location.href.indexOf("/index.html"))) + "/env.json";
+                    } else {
                         uri = window.location.origin + "/env.json";
                     }
                     this.httpPublic.get(uri)
-                        .then(data => {
+                        .then((data) => {
                                 this.data = data;
                                 //noinspection TypeScriptUnresolvedVariable
-                                let remoteBase = data["remoteBase"].toString();
-                                let n = remoteBase.indexOf("/_private");
+                                const remoteBase = data["remoteBase"].toString();
+                                const n = remoteBase.indexOf("/_private");
                                 this.endpoint = remoteBase.substring(0, n);
                                 this._automaticRemoveSplashsCreen = data["splashScreenRemoveMode"] !== "manual";
                                 resolve();
-                            }).catch(error=>{
+                            }).catch((error) => {
                                 alert("Missing env.json file");
                                 let errMsg: string;
                                 if (error instanceof Error) {
@@ -74,8 +62,7 @@ export class C8o extends C8oCore {
             }).then(() => {
                 this.extractendpoint();
             });
-        }
-        else {
+        } else {
             this.promiseConstructor = new Promise((resolve) => {
                 this.endpoint = c8oSettings.endpoint;
                 this.extractendpoint();
@@ -119,8 +106,8 @@ export class C8o extends C8oCore {
      * This should be called OnPlatform Ready to remove splashscreen if necessary
      *
      */
-    public finalizeInit(): Promise<any>{
-        this.promiseFinInit = new Promise((resolve)=>{
+    public finalizeInit(): Promise<any> {
+        this.promiseFinInit = new Promise((resolve) => {
             Promise.all([this.promiseInit]).then(() => {
                 /**
                  * Looking for splashScreen timeOut
@@ -133,19 +120,17 @@ export class C8o extends C8oCore {
                 /**
                  * Looking for cblite
                  */
-                if (window["cblite"] != undefined) {
+                if (window["cblite"] !== undefined) {
                     window["cblite"].getURL((err, url) => {
                         if (err) {
                             resolve();
-                        }
-                        else{
+                        } else {
                             url = url.replace(new RegExp("/$"), "");
                             this.couchUrl = url;
                             resolve();
                         }
                     });
-                }
-                else {
+                } else {
                     resolve();
                 }
             });

@@ -1,21 +1,19 @@
+import { C8oException, C8oExceptionMessage, C8oHttpRequestException, C8oLogLevel, C8oProgress, C8oResponseJsonListener, C8oRessourceNotFoundException, C8oSettings } from "c8osdkjscore";
 import "rxjs/Rx";
 import any = jasmine.any;
 import {C8o} from "../src/c8o/c8o.service";
 import {C8oUtils} from "../src/c8o/c8oUtils.service";
-import{ C8oSettings, C8oLogLevel, C8oException, C8oExceptionMessage, C8oProgress, C8oRessourceNotFoundException, C8oResponseJsonListener, C8oHttpRequestException } from "c8osdkjscore";
 import { Info, Stuff} from "./utils.help";
 declare var require: any;
-
 
 describe("provider: common verifications", () => {
     beforeEach(() => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
     });
 
-
-    it("should check sdk version (CheckVersion)", function(done){
-        let c8o : C8o = new C8o();
-        let settings: C8oSettings = new C8oSettings();
+    it("should check sdk version (CheckVersion)", function(done) {
+        const c8o: C8o = new C8o();
+        const settings: C8oSettings = new C8oSettings();
         settings
             .setEndPoint(Info.endpoint)
             .setLogRemote(false)
@@ -25,14 +23,13 @@ describe("provider: common verifications", () => {
         }).then(() => {
             expect(c8o.sdkVersion).toBe(require("../package.json").version);
             done();
-        })
+        });
 
     });
 
-
-    it("should check someParams (CheckParams)", function(done){
-            let c8o : C8o = new C8o();
-            let settings: C8oSettings = new C8oSettings();
+    it("should check someParams (CheckParams)", function(done) {
+            const c8o: C8o = new C8o();
+            const settings: C8oSettings = new C8oSettings();
             settings
                 .setEndPoint(Info.endpoint)
                 .setLogRemote(false)
@@ -54,7 +51,7 @@ describe("provider: common verifications", () => {
                     .then((response: any) => {
                             done.fail("then is not supposed to happend");
                             return null;
-                        }
+                        },
                     )
                     .fail((error) => {
                         expect(error.message).toBe(C8oExceptionMessage.illegalArgumentNullParameter("resquestable"));
@@ -79,16 +76,15 @@ describe("provider: common verifications", () => {
                         .setEndPoint("htdrdr:fake.com");
                     c8o.init(settings).catch((err: C8oException) => {
                         expect(err.message).toBe(C8oExceptionMessage.illegalArgumentInvalidURL("htdrdr:fake.com"));
-                        let progress: C8oProgress = new C8oProgress();
+                        const progress: C8oProgress = new C8oProgress();
                         progress.raw = "justanexample";
                         progress.changed = true;
-                        let progress2: C8oProgress = new C8oProgress(progress);
+                        const progress2: C8oProgress = new C8oProgress(progress);
                         expect(progress2.raw).toBe(progress.raw);
                         expect(progress2.changed).toBe(false);
                         try {
-                            let progress: C8oProgress = new C8oProgress(null);
-                        }
-                        catch (error) {
+                            const progress: C8oProgress = new C8oProgress(null);
+                        } catch (error) {
                             expect(error.message).not.toBeNull();
                             done();
                         }
@@ -97,32 +93,26 @@ describe("provider: common verifications", () => {
                 });
             });
 
-        }
+        },
     );
 
-
-    it("should log after init (c8ologAfterinit)", function(done){
-        let c8o : C8o = new C8o();
+    it("should log after init (c8ologAfterinit)", function(done) {
+        const c8o: C8o = new C8o();
 
         c8o.log.info("Test log after init");
-        setTimeout(()=>{
+        setTimeout(() => {
 
-            c8o.init(Stuff.C8o).then(()=>{
-                setTimeout(()=>{ done(); }, 2000);
+            c8o.init(Stuff.C8o).then(() => {
+                setTimeout(() => { done(); }, 2000);
             }).catch((err: C8oException) => {
                 expect(err).toBeUndefined();
             });
 
-
         }, 5000);
-
-
 
     });
 
-
-
-    it("should verify C8oExceptionMessages (C8oExceptionsMessages)", function(done){
+    it("should verify C8oExceptionMessages (C8oExceptionsMessages)", function(done) {
             new C8oRessourceNotFoundException("a", new Error("abc"));
             expect(C8oExceptionMessage.notImplementedFullSyncInterface()).toBe("You are using the default FullSyncInterface which is not implemented");
             expect(C8oExceptionMessage.invalidParameterValue("params", "details")).toBe("The parameter 'params' is invalid, details");
@@ -240,12 +230,12 @@ describe("provider: common verifications", () => {
             C8oExceptionMessage.MissingLocalCacheResponseDocument();
             C8oExceptionMessage.clientKeyStore();
             done();
-        }
+        },
     );
 
-    it("should returns and IllegalArgument Exception (C8oBadEndpoint)", function(done){
-            let c8o : C8o = new C8o();
-            let settings: C8oSettings = new C8oSettings();
+    it("should returns and IllegalArgument Exception (C8oBadEndpoint)", function(done) {
+            const c8o: C8o = new C8o();
+            const settings: C8oSettings = new C8oSettings();
             settings.setDefaultDatabaseName("retaildb")
                 .setLogC8o(true)
                 .setLogLevelLocal(C8oLogLevel.DEBUG)
@@ -255,16 +245,14 @@ describe("provider: common verifications", () => {
                 done();
             });
 
-        }
+        },
     );
 
-
-
     it("should genrerates exceptions (C8oUnknownHostCallAndLog)",
-        async()=>{
-            let c8o : C8o = new C8o();
+        async () => {
+            const c8o: C8o = new C8o();
             let exceptionLog;
-            let settings: C8oSettings = new C8oSettings();
+            const settings: C8oSettings = new C8oSettings();
             settings
                 .setEndPoint("http://" + Info.host + "ee" + Info.port + Info.project_path)
                 .setLogOnFail((exception: Error) => {
@@ -282,7 +270,7 @@ describe("provider: common verifications", () => {
                             .fail((err) => {
                                 expect(err).not.toBeNull();
                                 expect(err instanceof C8oException).toBeTruthy();
-                                let expection = err.cause;
+                                const expection = err.cause;
                                 expect(expection instanceof C8oHttpRequestException).toBeTruthy();
 
                                 expect(exceptionLog).not.toBeNull();

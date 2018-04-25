@@ -1,6 +1,6 @@
 {
-  "name": "c8osdkangular",
-  "version": "2.1.64-alpha8",
+  "name": "c8osdkvuejs",
+  "version": "0.0.0-beta11",
   "description": "convertigo's MBaaS client API service",
   "main": "bundle/index.umd.js",
   "module": "src/index.js",
@@ -20,7 +20,6 @@
     "typedoc": "typedoc",
     "build-dev": "tsc -p ."
   },
-
   "keywords": [
     "MBaaS",
     "TypeScript",
@@ -41,14 +40,12 @@
   "license": "Apache License Version 2.0, January 2004",
   "dependencies": {
     "@types/node": "^8.5.2",
-    "@types/pouchdb": "6.3.1",
-    "c8osdkjscore": "0.0.0-beta12",
-    "pouchdb-browser": "6.3.4",
-    "rxjs": "5.5.2",
-    "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.18",
-    "vue-resource":"1.5.0",
-    "axios":"0.18.0"
+    "@types/pouchdb": "6.3.2",
+    "pouchdb-browser": "6.4.3",
+    "rxjs": "5.5.10",
+    "zone.js": "0.8.26",
+    "axios": "0.18.0",
+    "c8osdkjscore": "0.0.0-beta15"
   },
   "devDependencies": {
     "rimraf": "2.6.1",
@@ -77,12 +74,7 @@
     "tslint-loader": "3.6.0",
     "typedoc": "0.9.0",
     "webpack": "3.10.0",
-    "typescript": "2.4.2",
+    "typescript": "2.6.2",
     "browserify": "16.2.0"
-  },
-  "peerDependencies": {
-    "rxjs": ">= 5.4.3 <= 5.5.2",
-    "zone.js": ">= 0.8.17 <= 0.8.18",
-    "sw-toolbox": "~3.6.0"
   }
 }

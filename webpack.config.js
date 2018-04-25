@@ -1,19 +1,7 @@
-/**
- * Adapted from angular2-webpack-starter
- */
-
 const helpers = require('./config/helpers'),
     webpack = require('webpack');
 
-/**
- * Webpack Plugins
- */
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
-const DefinePlugin = require('webpack/lib/DefinePlugin');
-const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
-
 module.exports = {
-    devtool: 'inline-source-map',
 
     resolve: {
         extensions: ['.ts', '.js']
@@ -26,7 +14,7 @@ module.exports = {
         publicPath: '/',
         filename: 'index.umd.js',
         libraryTarget: 'umd',
-        library: 'c8osdkangular2'
+        library: 'c8osdkvuejs'
     },
 
     // require those dependencies but don't bundle them
@@ -46,18 +34,9 @@ module.exports = {
     },
 
     plugins: [
-        // fix the warning in ./~/@angular/core/src/linker/system_js_ng_module_factory_loader.js
-        new webpack.ContextReplacementPlugin(
-            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-            helpers.root('./src')
-        ),
-
-        new webpack.LoaderOptionsPlugin({
-            options: {
-                tslintLoader: {
-                    emitErrors: false,
-                    failOnHint: false
-                }
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
             }
         })
     ]

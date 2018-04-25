@@ -1,5 +1,5 @@
 //noinspection TsLint
-import {C8oSettings, C8oLogLevel} from "c8osdkjscore";
+import {C8oLogLevel, C8oSettings} from "c8osdkjscore";
 import {C8o} from "../src/c8o/c8o.service";
 export class Info {
     // if you wants to use a proxy you mast change remote host and port please change configuration in Root/config/karama.conf.js
@@ -27,7 +27,7 @@ export class Info {
 //noinspection TsLint
 export class Stuff {
     static get C8o() {
-        let c8oSettings: C8oSettings = new C8oSettings();
+        const c8oSettings: C8oSettings = new C8oSettings();
         c8oSettings
             .setEndPoint(Info.endpoint)
             .setLogRemote(true)
@@ -37,7 +37,7 @@ export class Stuff {
     }
 
     static get C8o_FS() {
-        let c8oSettings: C8oSettings = new C8oSettings();
+        const c8oSettings: C8oSettings = new C8oSettings();
         c8oSettings
             .setDefaultDatabaseName("clientsdktesting")
             .setEndPoint(Info.endpoint)
@@ -48,7 +48,7 @@ export class Stuff {
     }
 
     static get C8o_FS_PULL() {
-        let c8oSettings: C8oSettings = new C8oSettings();
+        const c8oSettings: C8oSettings = new C8oSettings();
         c8oSettings
             .setDefaultDatabaseName("qa_fs_pull")
             .setEndPoint(Info.endpoint)
@@ -58,7 +58,7 @@ export class Stuff {
         return c8oSettings;
     }
     static get C8o_FS_PUSH() {
-        let c8oSettings: C8oSettings = new C8oSettings();
+        const c8oSettings: C8oSettings = new C8oSettings();
         c8oSettings
             .setDefaultDatabaseName("qa_fs_push")
             .setEndPoint(Info.endpoint)
@@ -69,7 +69,7 @@ export class Stuff {
     }
 
     static get C8o_LC() {
-        let c8oSettings: C8oSettings = new C8oSettings();
+        const c8oSettings: C8oSettings = new C8oSettings();
         c8oSettings
             .setEndPoint(Info.endpoint)
             .setLogRemote(false)
@@ -81,32 +81,32 @@ export class Stuff {
 
 //noinspection TsLint
 export class Functions {
-    static CheckLogRemoteHelper(c8o: C8o, lv: any, msg: string) {
+    public static CheckLogRemoteHelper(c8o: C8o, lv: any, msg: string) {
 
         c8o.callJson(".GetLogs").then(
             (response: any) => {
-                let sLine = response["document"]["line"];
+                const sLine = response["document"]["line"];
                 expect(sLine != null).toBeTruthy();
-                for (let lvl of lv) {
-                    let line = JSON.parse(sLine);
+                for (const lvl of lv) {
+                    const line = JSON.parse(sLine);
                     expect(line[2]).toBe(lvl);
                     let newMsg = line[4];
                     newMsg = newMsg.substring(newMsg.indexOf("logID="));
                     expect(msg).toBe(newMsg);
                 }
                 return null;
-            }
+            },
         );
 
     }
-    static async pingasync(){
+    public static async pingasync() {
 
     }
 }
 
 export class PlainObjectA {
     public name: string;
-    public bObjects: Array<any>;
+    public bObjects: any[];
     public bObject: PlainObjectB;
 }
 
