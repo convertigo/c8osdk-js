@@ -27,13 +27,13 @@ export class C8o extends C8oCore {
             this.promiseConstructor = new Promise((resolve) => {
                 // if project is running into web browser served by convertigo
                 // get the url from window.location
-                if (window.location.href.startsWith("http") && window.location.href.indexOf("/DisplayObjects") !== -1) {
+                if (window.location.href.indexOf("http") === 0 && window.location.href.indexOf("/DisplayObjects") !== -1) {
                     const n = window.location.href.indexOf("/DisplayObjects");
                     this.endpoint = window.location.href.substring(0, n);
                     resolve();
                 } else {
                     let uri = "";
-                    if (window.location.href.startsWith("file://")) {
+                    if (window.location.href.indexOf("file://") === 0) {
                         uri = (window.location.href.substring(0,
                             window.location.href.indexOf("/index.html"))) + "/env.json";
                     } else {
