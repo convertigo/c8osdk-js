@@ -35,7 +35,7 @@ module.exports = function(config) {
         // Webpack please don't spam the console when running in karma!
         webpackMiddleware: { stats: 'errors-only'},
 
-        reporters: [ 'mocha', 'coverage', 'remap-coverage' ],
+        reporters: [ 'mocha', 'coverage', 'remap-coverage', 'dots', 'saucelabs' ],
 
         mochaReporter: {
             ignoreSkipped: true
@@ -100,11 +100,7 @@ module.exports = function(config) {
     };
 
     if (process.env.TRAVIS){
-        configuration.browsers = [
-            Object.keys(configuration.customLaunchers)
-        ];
-        configuration.reporters = ['dots', 'saucelabs'];
-        configuration.singleRun = true;
+        configuration.browsers = Object.keys(configuration.customLaunchers);
     }
 
     config.set(configuration);
