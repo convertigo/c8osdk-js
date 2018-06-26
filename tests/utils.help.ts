@@ -31,7 +31,7 @@ export class Stuff {
         c8oSettings
             .setEndPoint(Info.endpoint)
             .setLogRemote(true)
-            .setLogLevelLocal(C8oLogLevel.ERROR)
+            .setLogLevelLocal(C8oLogLevel.DEBUG)
             .addHeader("x-convertigo-mb", "7.5.0-beta");
         return c8oSettings;
     }
@@ -42,7 +42,7 @@ export class Stuff {
             .setDefaultDatabaseName("clientsdktesting")
             .setEndPoint(Info.endpoint)
             .setLogRemote(false)
-            .setLogLevelLocal(C8oLogLevel.ERROR)
+            .setLogLevelLocal(C8oLogLevel.DEBUG)
             .addHeader("x-convertigo-mb", "7.5.0-beta");
         return c8oSettings;
     }
@@ -53,7 +53,7 @@ export class Stuff {
             .setDefaultDatabaseName("qa_fs_pull")
             .setEndPoint(Info.endpoint)
             .setLogRemote(false)
-            .setLogLevelLocal(C8oLogLevel.ERROR)
+            .setLogLevelLocal(C8oLogLevel.DEBUG)
             .addHeader("x-convertigo-mb", "7.5.0-beta");
         return c8oSettings;
     }
@@ -63,7 +63,7 @@ export class Stuff {
             .setDefaultDatabaseName("qa_fs_push")
             .setEndPoint(Info.endpoint)
             .setLogRemote(false)
-            .setLogLevelLocal(C8oLogLevel.ERROR)
+            .setLogLevelLocal(C8oLogLevel.DEBUG)
             .addHeader("x-convertigo-mb", "7.5.0-beta");
         return c8oSettings;
     }
@@ -73,7 +73,7 @@ export class Stuff {
         c8oSettings
             .setEndPoint(Info.endpoint)
             .setLogRemote(false)
-            .setLogLevelLocal(C8oLogLevel.ERROR)
+            .setLogLevelLocal(C8oLogLevel.DEBUG)
             .addHeader("x-convertigo-mb", "7.5.0-beta");
         return c8oSettings;
     }
