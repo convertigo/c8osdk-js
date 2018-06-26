@@ -101,7 +101,7 @@ module.exports = function(config) {
 
     if (process.env.TRAVIS){
         configuration.browsers = [
-            Object.keys(customLaunchers)
+            Object.keys(configuration.customLaunchers)
         ];
         configuration.reporters = ['dots', 'saucelabs'];
         configuration.singleRun = true;
