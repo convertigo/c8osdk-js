@@ -7,9 +7,13 @@
   <a href="https://www.npmjs.com/package/c8osdkjs"><img src="https://badge.fury.io/js/c8osdkjs.svg?style=flat-square" alt="NPM version"></a>
   <a href="https://travis-ci.org/convertigo/c8osdk-js"><img
   src="https://travis-ci.org/convertigo/c8osdk-js.svg?branch=master" alt="Travis Status"></a>
+<a href="https://saucelabs.com/u/CharlesGrimont">
+  <img src="https://saucelabs.com/browser-matrix/CharlesGrimont.svg" alt="Sauce Test Status"/>
+</a> 
+</a> 
 </p>
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/CharlesGrimont.svg)](https://saucelabs.com/u/CharlesGrimont)
+
 
 This is the Convertigo library for javascript
 
