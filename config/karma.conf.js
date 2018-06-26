@@ -66,7 +66,8 @@ module.exports = function(config) {
               }
         },
 
-        singleRun: true
+        singleRun: true,
+        browserNoActivityTimeout: 100000
     };
 
     if (process.env.TRAVIS){
