@@ -222,7 +222,7 @@ describe("provider: basic calls verifications", () => {
         },
     );
 
-    it("should check that log remote works (CheckLogRemote)", (done) => {
+   /* it("should check that log remote works (CheckLogRemote)", (done) => {
             const c8o = new C8o();
             const c8oSettings: C8oSettings = new C8oSettings();
             c8oSettings.setLogC8o(false);
@@ -263,7 +263,7 @@ describe("provider: basic calls verifications", () => {
                 });
         },
     );
-
+*/
     it("should check that one default promise works (C8oDefaultPromiseXmlOne)", (done) => {
             const c8o = new C8o();
             c8o.init(Stuff.C8o).catch((err: C8oException) => {
