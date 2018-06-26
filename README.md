@@ -1,8 +1,16 @@
-[![Build Status](https://travis-ci.org/convertigo/c8osdk-vuejs.svg?branch=master)](https://travis-ci.org/convertigo/c8osdk-vuejs) [![npm version](https://img.shields.io/npm/v/c8osdkvuejs.svg)](https://www.npmjs.com/package/c8osdkvuejs)
+<p align="center">
+  <img src="https://www.convertigo.com/wp-content/themes/EightDegree/images/logo_convertigo.png">
+  <h2 align="center"> C8oSDK Javascript</h2>
+</p>
+<p align="center">
+  <a href="/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
+  <a href="https://www.npmjs.com/package/c8osdkjs"><img src="https://badge.fury.io/js/c8osdkjs.svg?style=flat-square" alt="NPM version"></a>
+  <a href="https://travis-ci.org/convertigo/c8osdk-js"><img
+  src="https://travis-ci.org/convertigo/c8osdk-js.svg?branch=master" alt="Travis Status"></a>
+</p>
 
-# C8oSDKVueJS #
 
-This is the Convertigo library for Vue.js
+This is the Convertigo library for javascript
 
 Convertigo Client SDK is a set of libraries used by mobile or Windows desktop applications to access Convertigo Server services. An application using the SDK can easily access Convertigo services such as Sequences and Transactions.
 
@@ -11,18 +19,19 @@ The Client SDK will abstract the programmer from handling the communication prot
 Client SDK is available for:
 * [Android Native](https://github.com/convertigo/c8osdk-android) apps as a standard Gradle dependency
 * [iOS native](https://github.com/convertigo/c8osdk-ios) apps as a standard Cocoapod
+* [React Native](https://github.com/convertigo/react-native-c8osdk) as a NPM package
+* [Google Angular framework](https://github.com/convertigo/c8osdk-angular) as typescript an NPM package
+* [Vue.js](https://github.com/convertigo/c8osdk-js), [ReactJS](https://github.com/convertigo/c8osdk-js), [AngularJS](https://github.com/convertigo/c8osdk-js) Framework, or any [Javascript](https://github.com/convertigo/c8osdk-js) project as a standard Javascript NPM package
 * Windows desktop or Xamarin apps as Nugets or Xamarin Components
-* [Google Angular framework](https://github.com/convertigo/c8osdk-angular) as an NPM package
-* [Vue.js](https://github.com/convertigo/c8osdk-vuejs) Framework as an NPM package
 
 
-This current package is the Vue.js SDK. For others SDKs see official Convertigo Documentation.
+This current package is the Javascript SDK. For others SDKs see official Convertigo Documentation.
 
 ## Documentation ##
 
 #### Creating a C8o instance ####
 
-    import { C8o } from "c8osdkvuejs"
+    import { C8o } from "c8osdkjs"
     …
         
     const c8o = new C8o()
@@ -39,7 +48,7 @@ A C8oSettings can be instantiated from an existing C8oSettings or C8o instance.
 
 In order to finish the c8o initialization you must use init method from c8o object with a c8oSettings parameters
 
-    import { C8o, C8oSettings } from "c8osdkvuejs"
+    import { C8o, C8oSettings } from "c8osdkjs"
     …
     // The only way
     let settings: C8oSettings = new C8oSettings()

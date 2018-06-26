@@ -1,6 +1,6 @@
 {
-  "name": "c8osdkvuejs",
-  "version": "2.2.1",
+  "name": "c8osdkjs",
+  "version": "2.2.2",
   "description": "convertigo's MBaaS client API service",
   "main": "bundle/index.umd.js",
   "module": "src/index.js",
@@ -25,6 +25,8 @@
     "TypeScript",
     "JavaScript",
     "Vue.js",
+    "ReactJS",
+    "AngularJS",
     "Convertigo",
     "mbaas",
     "madp",
@@ -45,7 +47,7 @@
     "rxjs": "5.5.10",
     "zone.js": "0.8.26",
     "axios": "0.18.0",
-    "c8osdkjscore": "1.0.0"
+    "c8osdkjscore": "1.0.1"
   },
   "devDependencies": {
     "rimraf": "2.6.1",
