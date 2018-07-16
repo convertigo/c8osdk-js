@@ -55,7 +55,7 @@ module.exports = function(config) {
         autoWatch: false,
 
         browsers: [
-            'Chrome'
+            'Chrome', 'Firefox', 'Opera'
         ],
 
         customLaunchers: {
@@ -100,7 +100,7 @@ module.exports = function(config) {
     };
 
     if (process.env.TRAVIS){
-        configuration.browsers = Object.keys(configuration.customLaunchers);
+        //configuration.browsers = Object.keys(configuration.customLaunchers);
     }
 
     config.set(configuration);

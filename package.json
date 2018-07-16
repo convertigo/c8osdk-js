@@ -1,6 +1,6 @@
 {
   "name": "c8osdkjs",
-  "version": "2.2.2",
+  "version": "2.2.3-beta1",
   "description": "convertigo's MBaaS client API service",
   "main": "bundle/index.umd.js",
   "module": "src/index.js",
@@ -44,7 +44,7 @@
     "@types/node": "^8.5.2",
     "@types/pouchdb": "6.3.2",
     "axios": "0.18.0",
-    "c8osdkjscore": "1.0.1",
+    "c8osdkjscore": "1.0.2-beta1",
     "pouchdb-browser": "6.4.3",
     "rxjs": "5.5.10",
     "zone.js": "0.8.26"
