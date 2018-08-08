@@ -75,7 +75,7 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
      * @return {FormData}
      */
     public transformRequestformdata(parameters: any): FormData {
-        const formdata: FormData =  new FormData();
+        const formdata: FormData = new FormData();
         for (const p in parameters) {
             if (parameters[p] instanceof Array) {
                 for (const p1 in parameters[p]) {
@@ -90,7 +90,7 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
             } else {
                 if (parameters[p] instanceof FileList) {
                     for (const j of parameters[p]) {
-                        formdata.append(p, parameters[p][j], parameters[p][j].name);
+                        formdata.append(p, j, j["name"]);
                     }
                 } else {
                     formdata.append(p, parameters[p]);
@@ -248,11 +248,20 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
      * @param {C8oResponseListener} c8oResponseListener
      * @return {Promise<any>}
      */
+    /**
+     * Upload File using an Http client
+     * @param {string} url
+     * @param {FormData} form
+     * @param {Object} parameters
+     * @param {C8oResponseListener} c8oResponseListener
+     * @return {Promise<any>}
+     */
     public uploadFileHttp(url: string, form: FormData, parameters: any,
-                          c8oResponseListener: C8oResponseListener): Promise<any> {
-        const headersObject = {"Accept": "application/json", "x-convertigo-sdk": this.c8o.sdkVersion};
+        c8oResponseListener: C8oResponseListener): Promise<any> {
+        const headersObject = {
+            'Content-Type': 'multipart/form-data', "x-convertigo-sdk": this.c8o.sdkVersion, withCredentials: true
+        };
         Object.assign(headersObject, this.c8o.headers);
-        const headers = {headers: headersObject};
         const progress: C8oProgress = new C8oProgress();
         progress.pull = false;
         const varNull: JSON = null;
@@ -260,16 +269,18 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
         if (this.firstCall) {
             this.p1 = new Promise((resolve) => {
                 this.firstCall = false;
-
-                this.c8o.httpPublic.post({url, data: form, withCredentials: true, headers, onUploadProgress(event) {
-                        this.handleProgress(event, progress, parameters, c8oResponseListener, varNull);
-                    }}, {
-                    headers,
-                    withCredentials: true,
-                }).then((response) =>
+                this.c8o.httpPublic(
+                    {
+                        method: 'post',
+                        url: url,
+                        data: form,
+                        headers: headersObject
+                    }
+                ).then((response) =>
                     resolve(response.data),
                 ).catch((error) => {
-                    resolve({error : (new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest(), error)),
+                    resolve({
+                        error: (new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest(), error)),
                     });
                 });
             });
@@ -277,15 +288,18 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
         } else {
             return new Promise((resolve) => {
                 Promise.all([this.p1]).then(() => {
-                    this.c8o.httpPublic.post({url, data: form, withCredentials: true, headers, onUploadProgress(event) {
-                            this.handleProgress(event, progress, parameters, c8oResponseListener, varNull);
-                        }}, {
-                        headers,
-                        withCredentials: true,
-                    }).then((response) =>
+                    this.c8o.httpPublic(
+                        {
+                            method: 'post',
+                            url: url,
+                            data: form,
+                            headers: headersObject
+                        }
+                    ).then((response) =>
                         resolve(response.data),
                     ).catch((error) => {
-                        resolve({error : (new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest(), error)),
+                        resolve({
+                            error: (new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest(), error)),
                         });
                     });
                 });
