@@ -35,7 +35,7 @@ module.exports = function(config) {
         // Webpack please don't spam the console when running in karma!
         webpackMiddleware: { stats: 'errors-only'},
 
-        reporters: [ 'mocha', 'coverage', 'remap-coverage', 'dots', 'saucelabs' ],
+        reporters: [ 'mocha', 'coverage', 'remap-coverage' ],
 
         mochaReporter: {
             ignoreSkipped: true
@@ -55,52 +55,23 @@ module.exports = function(config) {
         autoWatch: false,
 
         browsers: [
-            'Chrome', 'Firefox', 'Opera'
+            'Chrome'
         ],
 
         customLaunchers: {
-              sl_firefox: {
-                base: 'SauceLabs',
-                browserName: 'firefox',
-                platform: 'Windows 7',
-                version: '30'
-              },
-              sl_firefox2: {
-                base: 'SauceLabs',
-                browserName: 'firefox',
-                platform: 'Windows 10',
-                version: '60'
-              },
-              sl_chrome: {
-                base: 'SauceLabs',
-                browserName: 'chrome',
-                platform: 'Windows 7',
-                version: '35'
-              },
-              sl_chrome2: {
-                base: 'SauceLabs',
-                browserName: 'chrome',
-                platform: 'Windows 10',
-                version: '67'
-              },
-              sl_ie_11: {
-                base: 'SauceLabs',
-                browserName: 'internet explorer',
-                platform: 'Windows 10',
-                version: '11'
-              }
+            ChromeTravisCi: {
+                base: 'Chrome',
+                flags: ['--no-sandbox']
+            }
         },
 
-        singleRun: true,
-        concurrency: 1,
-        captureTimeout: 600000,
-        browserDisconnectTimeout: 600000,
-        browserDisconnectTolerance: 3,
-        browserNoActivityTimeout: 600000
+        singleRun: true
     };
 
     if (process.env.TRAVIS){
-        //configuration.browsers = Object.keys(configuration.customLaunchers);
+        configuration.browsers = [
+            'ChromeTravisCi'
+        ];
     }
 
     config.set(configuration);
