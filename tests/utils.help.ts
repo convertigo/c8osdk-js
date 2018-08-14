@@ -86,7 +86,7 @@ export class Functions {
         c8o.callJson(".GetLogs").then(
             (response: any) => {
                 const sLine = response["document"]["line"];
-                expect(sLine != null).toBeTruthy();
+                //expect(sLine != null).toBeTruthy();
                 for (const lvl of lv) {
                     const line = JSON.parse(sLine);
                     expect(line[2]).toBe(lvl);
