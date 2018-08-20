@@ -207,14 +207,15 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
     public httpPost(url: string, parameters: any): Promise<any> {
         parameters = this.transformRequest(parameters);
         const headersObject = {"Content-Type": "application/x-www-form-urlencoded",
-            "x-convertigo-sdk": this.c8o.sdkVersion, withCredentials: true};
+            "x-convertigo-sdk": this.c8o.sdkVersion};
         Object.assign(headersObject, this.c8o.headers);
         
         if (this.firstCall) {
             this.p1 = new Promise((resolve, reject) => {
                 this.firstCall = false;
                 this.c8o.httpPublic.post(url, parameters, {
-                    headers: headersObject
+                    headers: headersObject,
+                    withCredentials: true
                 }).then((response) =>
                     resolve(response.data),
                 ).catch((error) => {
@@ -227,7 +228,8 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
             return new Promise((resolve, reject) => {
                 Promise.all([this.p1]).then(() => {
                     this.c8o.httpPublic.post(url, parameters, {
-                        headers: headersObject
+                        headers: headersObject,
+                        withCredentials: true
                     }).then((response) =>
                         resolve(response.data),
                     ).catch((error) => {
