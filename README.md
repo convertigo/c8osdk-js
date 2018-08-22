@@ -26,7 +26,7 @@
   - [Advanced instance settings](#advanced-instance-settings)
   - [Calling a Convertigo requestable](#calling-a-convertigo-requestable)
   - [Calling a Convertigo requestable with parameters](#calling-a-convertigo-requestable-with-parameters)
-  - [Calling a Convertigo requestable with upload files](#calling-a-convertigo-requestable-with-upload-files)
+  - [Calling a Convertigo requestable uploading a files](#calling-a-convertigo-requestable-uploading-a-files)
   - [Chaining calls](#chaining-calls)
   - [Handling failures](#handling-failures)
   - [Writing the device logs to the Convertigo server](#writing-the-device-logs-to-the-convertigo-server)
@@ -200,7 +200,7 @@ this.c8o.callJson(".login",{
      //handle result
    });
 ```
-### Calling a Convertigo requestable with upload files ###
+### Calling a Convertigo requestable uploading a files ###
 
 Convertigo requestables supports file as argument. You can pass it as key value pair.
 Indeed, the key is a string (name of the variable), and the value must be a Javascript File, or FileList. It can be into an array or directly passed as argument
