@@ -421,7 +421,6 @@ Convertigo Client SDK provides a high level access to local data following the s
 * fs://<database>.replicate_pull gets all database server modifications
 * fs://<database>.reset resets a database by removing all the data in it
 * fs://<database>.put_attachment Puts (add) an attachment to a document in the database
-* fs://<database>.get_attachment Gets an attachment from a document
 
 Where fs://<database> is the name of a specific FullSync Connector in the project specified in the endpoint. The fs://<database> name is optional only if the default database name is specified with the method setDefaultDatabaseName on the C8oSetting.
 
