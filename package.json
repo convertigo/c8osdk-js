@@ -1,6 +1,6 @@
 {
   "name": "c8osdkjs",
-  "version": "2.2.3-beta5",
+  "version": "2.2.3-beta6",
   "description": "convertigo's MBaaS client API service",
   "main": "bundle/index.umd.js",
   "module": "src/index.js",
