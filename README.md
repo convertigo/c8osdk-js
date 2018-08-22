@@ -433,20 +433,27 @@ All platforms can specify a local database prefix that allows many local databas
 
 // clear or create the "base" database
 // resultReset mustbe equal to { "ok" : true }
-let resultReset = await this.c8o.callJson('fs://base.reset');
+let resultReset = await this.c8o.callJson('fs://base.reset').async();
 
 // creates a new document on "base", with 2 key/value pairs
 // resultPost mustbe equal to { "ok": true, "id": "6f1b52df","rev":  "1-b0620371" }
-let resultPost = await this.c8o.callJson('fs://base.post', {
+let resultPost = await this.c8o.callJsonObject('fs://base.post', {
              firstname: "Jhonn",
              lastname: "Doe"
-         });
+         }).async();
 
 // retrieves the complet document from its "docid"
 // resultGet mustbe equal to { "lastname": "Doe", "rev": "1-b0620371", "firstname": "John", "_id": "6f1b52df" }
-let resultGet = await this.c8o.callJson('fs://base.get', {
+ this.c8o.callJsonObject('fs://base.get', {
              docid: resultPost['id']
-         });
+         }).async();
+
+// Put an attachment into our document 
+let resultGet = await this.c8o.callJson("fs://base.put_attachment", 
+            "docid", id, "name", "text2.txt", "content_type", "text/plain", "content", new Blob(["Hello Convertigo !"], {type: "text/plain"})).async();
+
+// Get this attachment from our document
+let resultGet = await this.c8o.callJson("fs://base.get", "docid", id, "attachments", true).async();
 ```
 
 ### Replicating Full Sync databases
