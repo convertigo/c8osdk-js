@@ -9,7 +9,7 @@ describe("provider: basic calls verifications", () => {
     beforeEach(() => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000000;
     });
-
+/**/
     it("should ping (C8oDefaultPing)", (done) => {
         const c8o = new C8o();
         c8o.init(Stuff.C8o).catch((err: C8oException) => {
@@ -434,4 +434,5 @@ describe("provider: basic calls verifications", () => {
             return null;
         });
     });
+    /**/
 });
