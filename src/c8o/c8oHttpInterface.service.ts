@@ -27,6 +27,8 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
                         return 1;
                     } else if (parameters[p][p1] instanceof File) {
                         return 1;
+                    } else if (parameters[p][p1] instanceof Blob) {
+                        return 1;
                     } else if (this.isCordova()) {
                         if (parameters[p][p1] instanceof URL) {
                             return 2;
@@ -37,6 +39,8 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
                 if (parameters[p] instanceof FileList) {
                     return 1;
                 } else if (parameters[p] instanceof File) {
+                    return 1;
+                } else if (parameters[p] instanceof Blob) {
                     return 1;
                 } else if (this.isCordova()) {
                     if (parameters[p] instanceof URL) {
