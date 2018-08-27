@@ -1,5 +1,5 @@
 import any = jasmine.any;
-import {C8oException, C8oPromise, C8oSettings} from "c8osdkjscore";
+import {C8oException, C8oPromise, C8oSettings, C8oLogLevel} from "c8osdkjscore";
 import "rxjs/Rx";
 import {C8o} from "../src/c8o/c8o.service";
 
@@ -9,7 +9,33 @@ describe("provider: basic calls verifications", () => {
     beforeEach(() => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000000;
     });
-/**/
+/**
+    it("should get a bad request endpoint (C8oBadRequestEndpoint)", (done) => {
+        const c8o = new C8o();
+
+        const c8oSettings: C8oSettings = new C8oSettings();
+        c8oSettings
+            .setEndPoint("http://c8o-dev.convertio.net:80/cems/projects/ClientSDKtesting")
+            .setLogRemote(true)
+            .setLogLevelLocal(C8oLogLevel.DEBUG)
+            .addHeader("x-convertigo-mb", "7.5.0-beta");
+
+        c8o.init(c8oSettings).catch((err: C8oException) => {
+            expect(err).toBeUndefined();
+        });
+        c8o.callJson(".Ping")
+        .then((response: any) => {
+                done.fail("error is not supposed to happend");
+                return null;
+            },
+        ).fail((error) => {
+            let message = "Failed to run the HTTP request: Network Error, while fetching http://c8o-dev.convertio.net:80/cems/admin/services/logs.Add"
+            console.log(error.message)
+            expect(error.message).toBe(message)
+            done()
+        });
+    });
+
     it("should ping (C8oDefaultPing)", (done) => {
         const c8o = new C8o();
         c8o.init(Stuff.C8o).catch((err: C8oException) => {

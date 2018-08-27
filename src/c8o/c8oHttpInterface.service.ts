@@ -224,11 +224,15 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
                     headers: headersObject,
                     withCredentials: true
                 }).then((response) =>
-                    resolve(response.data),
-                ).catch((error) => {
-                    resolve({error : (new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest(), error)),
-                    });
-                });
+                resolve(response.data),
+            ).catch((error) => {
+                if(error.message ==  "Network Error"){
+                    reject(new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest() + ": " + error.message + ", while fetching " +  error.config.url));
+                }
+                else{
+                    reject(new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest() + ": " + error.message));
+                }
+            });
             });
             return this.p1;
         } else {
@@ -240,8 +244,12 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
                     }).then((response) =>
                         resolve(response.data),
                     ).catch((error) => {
-                        resolve({error : (new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest(), error)),
-                        });
+                        if(error.message ==  "Network Error"){
+                            reject(new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest() + ": " + error.message + ", while fetching " +  error.config.url));
+                        }
+                        else{
+                            reject(new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest() + ": " + error.message));
+                        }
                     });
 
                 }).catch((error) => {
