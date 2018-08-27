@@ -245,10 +245,12 @@ export class C8oHttpInterface extends C8oHttpInterfaceCore {
                         resolve(response.data),
                     ).catch((error) => {
                         if(error.message ==  "Network Error"){
-                            reject(new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest() + ": " + error.message + ", while fetching " +  error.config.url));
+                            reject({error : (new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest() +": " + error.message + ", while fetching " +  error.config.url, error)),
+                        });
                         }
                         else{
-                            reject(new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest() + ": " + error.message));
+                            reject({error : (new C8oHttpRequestException(C8oExceptionMessage.runHttpRequest() +": " + error.message , error)),
+                        });
                         }
                     });
 

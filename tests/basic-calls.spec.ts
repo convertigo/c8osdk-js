@@ -9,7 +9,7 @@ describe("provider: basic calls verifications", () => {
     beforeEach(() => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000000;
     });
-/**
+/**/
     it("should get a bad request endpoint (C8oBadRequestEndpoint)", (done) => {
         const c8o = new C8o();
 
