@@ -161,14 +161,24 @@ describe("provider: fullsync verifications", () => {
             c8o.callJson("fs://.reset")
                 .then((response: any) => {
                     expect(response["ok"]).toBeTruthy();
+                    if(response["ok"] == false){
+                        this.c8o.log.error("error1");
+                    }
                     return c8o.callJson("fs://.post");
                 })
                 .then((response: any) => {
+                    if(response["ok"] == false){
+                        this.c8o.log.error("error2");
+                    }
+                    
                     expect(response["ok"]).toBeTruthy();
                     id = response["id"];
                     return c8o.callJson("fs://.reset");
                 })
                 .then((response: any) => {
+                    if(response["ok"] == false){
+                        this.c8o.log.error("error3");
+                    }
                     expect(response["ok"]).toBeTruthy();
                     return c8o.callJson("fs://.get", "docid", id);
                 })
@@ -177,6 +187,10 @@ describe("provider: fullsync verifications", () => {
                     return null;
                 })
                 .fail((error) => {
+                    if(error instanceof C8oException == false){
+                        this.c8o.log.error("error4");
+                    }
+                    
                     expect(error instanceof C8oException).toBeTruthy();
                     done();
                 });
