@@ -26,7 +26,7 @@ describe("provider: fullsync verifications", () => {
                 })
                 .then((response: any) => {
                     if(response["ok"] == false){
-                        console.log("error1");
+                        this.c8o.log.error("error1");
                     }
                     expect(response["ok"]).toBeTruthy();
                     id = response["id"];
@@ -39,7 +39,7 @@ describe("provider: fullsync verifications", () => {
                 })
                 .then((response: any) => {
                     if(response["ok"] == false){
-                        console.log("error2");
+                        this.c8o.log.error("error2");
                     }
                     expect(response["ok"]).toBeTruthy();
                     return c8o.callJson("fs://.get", "docid", id);
@@ -50,8 +50,8 @@ describe("provider: fullsync verifications", () => {
                 })
                 .fail((error) => {
                     if(error instanceof C8oException == false){
-                        console.log("error3");
-                        console.log(error);
+                        this.c8o.log.error("error3");
+                        this.c8o.log.error(error);
                     }
                     expect(error instanceof C8oException).toBeTruthy();
                     done();

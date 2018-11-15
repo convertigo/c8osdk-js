@@ -42,7 +42,7 @@ export class Stuff {
         c8oSettings
             .setDefaultDatabaseName("clientsdktesting")
             .setEndPoint(Info.endpoint)
-            .setLogRemote(false)
+            .setLogRemote(true)
             .setLogLevelLocal(C8oLogLevel.DEBUG)
             .addHeader("x-convertigo-mb", "7.5.0-beta");
         return c8oSettings;
