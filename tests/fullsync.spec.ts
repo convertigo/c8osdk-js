@@ -192,10 +192,16 @@ describe("provider: fullsync verifications", () => {
             let id: string;
             c8o.callJson("fs://.reset")
                 .then((response: any) => {
+                    if(response["ok"] == false){
+                        this.c8o.log.error("error1");
+                    }
                     expect(response["ok"]).toBeTruthy();
                     return c8o.callJson("fs://.post");
                 })
                 .then((response: any) => {
+                    if(response["ok"] == false){
+                        this.c8o.log.error("error1");
+                    }
                     expect(response["ok"]).toBeTruthy();
                     id = response["id"];
                     return c8o.callJson("fs://.post", "_id", id);
@@ -205,6 +211,10 @@ describe("provider: fullsync verifications", () => {
                     return null;
                 })
                 .fail((error) => {
+                    if(error instanceof C8oException == false){
+                        this.c8o.log.error("error3");
+                        this.c8o.log.error(error);
+                    }
                     expect(error instanceof C8oException).toBeTruthy();
                     done();
                 });
