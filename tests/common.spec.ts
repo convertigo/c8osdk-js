@@ -10,7 +10,7 @@ describe("provider: common verifications", () => {
     beforeEach(() => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
     });
-/**/
+/**
     it("should check bad requestable (badRequest)", function(done) {
         const c8o: C8o = new C8o();
         const settings: C8oSettings = new C8oSettings().setLogLevelLocal(C8oLogLevel.DEBUG);
