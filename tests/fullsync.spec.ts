@@ -25,23 +25,20 @@ describe("provider: fullsync verifications", () => {
                     return c8o.callJson("fs://.post", "_id", myId);
                 })
                 .then((response: any) => {
-                    if(response["ok"] == false){
-                        this.c8o.log.error("error1");
-                    }
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error1");
                     id = response["id"];
-                    expect(id).toBe(myId);
+                    expect(id == myId).toBeTruthy("error2");
                     return c8o.callJson("fs://.get", "docid", id);
                 })
                 .then((response: any) => {
-                    expect(response["_id"]).toBe(myId);
+                    expect(response["_id"] == myId).toBeTruthy("error3")
                     return c8o.callJson("fs://.delete", "docid", id);
                 })
                 .then((response: any) => {
                     if(response["ok"] == false){
                         this.c8o.log.error("error2");
                     }
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error4");
                     return c8o.callJson("fs://.get", "docid", id);
                 })
                 .then(() => {
@@ -49,11 +46,7 @@ describe("provider: fullsync verifications", () => {
                     return null;
                 })
                 .fail((error) => {
-                    if(error instanceof C8oException == false){
-                        this.c8o.log.error("error3");
-                        this.c8o.log.error(error);
-                    }
-                    expect(error instanceof C8oException).toBeTruthy();
+                    expect(error instanceof C8oException).toBeTruthy("error5");
                     done();
                 });
 
@@ -69,11 +62,11 @@ describe("provider: fullsync verifications", () => {
             let rev: string;
             c8o.callJson("fs://.reset")
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error1");
                     return c8o.callJson("fs://.post", "_id", myId);
                 })
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error2");
                     rev = response["rev"];
                     return c8o.callJson("fs://.delete", "docid", myId, "rev", "1-123456");
                 })
@@ -83,10 +76,9 @@ describe("provider: fullsync verifications", () => {
                 })
                 .fail((error) => {
                     expect(error.constructor).toBe(C8oException);
-                    // expect(false).toBeTruthy();
                     c8o.callJson("fs://.delete", "docid", myId, "rev", rev)
                         .then((response: any) => {
-                            expect(response["ok"]).toBeTruthy();
+                            expect(response["ok"]).toBeTruthy("error3");
                             return c8o.callJson("fs://.get", "docid", myId);
                         })
                         .then(() => {
@@ -113,17 +105,17 @@ describe("provider: fullsync verifications", () => {
             let rev: string;
             c8o.callJson("fs://.reset")
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error1");
                     return c8o.callJson("fs://.post", "ts", ts);
                 })
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error2");
                     id = response["id"];
                     rev = response["rev"];
                     return c8o.callJson("fs://.post", "_id", id, "_rev", rev, "ts", ts, "ts2", ts2);
                 })
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error3");
                     return c8o.callJson("fs://.get", "docid", id);
                 })
                 .then((response: any) => {
@@ -132,11 +124,11 @@ describe("provider: fullsync verifications", () => {
                     return c8o.callJson("fs://.destroy");
                 })
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error4");
                     return c8o.callJson("fs://.create");
                 })
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error5");
                     return c8o.callJson("fs://.get", "docid", id);
                 })
                 .then(() => {
@@ -160,26 +152,16 @@ describe("provider: fullsync verifications", () => {
             let id: string;
             c8o.callJson("fs://.reset")
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
-                    if(response["ok"] == false){
-                        this.c8o.log.error("error1");
-                    }
+                    expect(response["ok"]).toBeTruthy("error1");
                     return c8o.callJson("fs://.post");
                 })
                 .then((response: any) => {
-                    if(response["ok"] == false){
-                        this.c8o.log.error("error2");
-                    }
-                    
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error2");
                     id = response["id"];
                     return c8o.callJson("fs://.reset");
                 })
                 .then((response: any) => {
-                    if(response["ok"] == false){
-                        this.c8o.log.error("error3");
-                    }
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error3");
                     return c8o.callJson("fs://.get", "docid", id);
                 })
                 .then(() => {
@@ -187,11 +169,7 @@ describe("provider: fullsync verifications", () => {
                     return null;
                 })
                 .fail((error) => {
-                    if(error instanceof C8oException == false){
-                        this.c8o.log.error("error4");
-                    }
-                    
-                    expect(error instanceof C8oException).toBeTruthy();
+                    expect(error instanceof C8oException).toBeTruthy("error4");
                     done();
                 });
 
@@ -206,17 +184,11 @@ describe("provider: fullsync verifications", () => {
             let id: string;
             c8o.callJson("fs://.reset")
                 .then((response: any) => {
-                    if(response["ok"] == false){
-                        this.c8o.log.error("error1");
-                    }
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error1");
                     return c8o.callJson("fs://.post");
                 })
                 .then((response: any) => {
-                    if(response["ok"] == false){
-                        this.c8o.log.error("error1");
-                    }
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error2");
                     id = response["id"];
                     return c8o.callJson("fs://.post", "_id", id);
                 })
@@ -225,11 +197,7 @@ describe("provider: fullsync verifications", () => {
                     return null;
                 })
                 .fail((error) => {
-                    if(error instanceof C8oException == false){
-                        this.c8o.log.error("error3");
-                        this.c8o.log.error(error);
-                    }
-                    expect(error instanceof C8oException).toBeTruthy();
+                    expect(error instanceof C8oException).toBeTruthy("error3");
                     done();
                 });
 
@@ -244,11 +212,11 @@ describe("provider: fullsync verifications", () => {
             let id: string;
             c8o.callJson("fs://.reset")
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error1");
                     return c8o.callJson("fs://.post", C8o.FS_POLICY, C8o.FS_POLICY_NONE);
                 })
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error2");
                     id = response["id"];
                     return c8o.callJson("fs://.post", C8o.FS_POLICY, C8o.FS_POLICY_NONE, "_id", id);
                 })
@@ -257,7 +225,7 @@ describe("provider: fullsync verifications", () => {
                     return null;
                 })
                 .fail((error) => {
-                    expect(error instanceof C8oException).toBeTruthy();
+                    expect(error instanceof C8oException).toBeTruthy("error3");
                     done();
                 });
 
@@ -273,17 +241,17 @@ describe("provider: fullsync verifications", () => {
             const myId: string = "C8oFsPostExistingPolicyCreate-" + new Date().getTime().valueOf();
             c8o.callJson("fs://.reset")
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error1");
                     return c8o.callJson("fs://.post", "_id", myId);
                 })
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error2");
                     id = response["id"];
                     expect(id).toBe(myId);
                     return c8o.callJson("fs://.post", C8o.FS_POLICY, C8o.FS_POLICY_CREATE, "_id", id);
                 })
                 .then((response: any) => {
-                    expect(response["ok"]).toBeTruthy();
+                    expect(response["ok"]).toBeTruthy("error3");
                     expect(response["id"]).not.toBe(myId);
                     done();
                     return null;

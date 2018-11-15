@@ -57,7 +57,7 @@
     "concurrently": "3.5.1",
     "core-js": "2.5.1",
     "istanbul-instrumenter-loader": "3.0.0",
-    "jasmine-core": "2.8.0",
+    "jasmine-core": "3.3.0",
     "karma": "1.7.1",
     "karma-chrome-launcher": "2.2.0",
     "karma-coverage": "1.1.1",
