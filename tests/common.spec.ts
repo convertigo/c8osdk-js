@@ -120,24 +120,22 @@ describe("provider: common verifications", () => {
 
         },
     );
-
+/**/
     it("should log after init (c8ologAfterinit)", function(done) {
         const c8o: C8o = new C8o();
-
         c8o.log.info("Test log after init");
         setTimeout(() => {
-
             c8o.init(Stuff.C8o).then(() => {
                 setTimeout(() => { done(); }, 2000);
             }).catch((err: C8oException) => {
                 console.log(err);
-                expect(err).toBeUndefined();
+                done.fail(err.stack)
             });
 
         }, 5000);
 
     });
-
+/**/
     it("should verify C8oExceptionMessages (C8oExceptionsMessages)", function(done) {
             new C8oRessourceNotFoundException("a", new Error("abc"));
             expect(C8oExceptionMessage.notImplementedFullSyncInterface()).toBe("You are using the default FullSyncInterface which is not implemented");
