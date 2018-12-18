@@ -120,7 +120,7 @@ describe("provider: common verifications", () => {
 
         },
     );
-/**/
+/**
     it("should log after init (c8ologAfterinit)", function(done) {
         const c8o: C8o = new C8o();
         c8o.log.info("Test log after init");
