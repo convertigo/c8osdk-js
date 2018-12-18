@@ -7,9 +7,14 @@ import { Info, Stuff} from "./utils.help";
 declare var require: any;
 
 describe("provider: common verifications", () => {
+    var originalTimeout;
     beforeEach(() => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
+        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 500000;
     });
+    afterEach(function() {
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+      });
 /**/
     it("should check bad requestable (badRequest)", function(done) {
         const c8o: C8o = new C8o();
@@ -125,6 +130,7 @@ describe("provider: common verifications", () => {
             c8o.init(Stuff.C8o).then(() => {
                 setTimeout(() => { done(); }, 2000);
             }).catch((err: C8oException) => {
+                console.log(err);
                 expect(err).toBeUndefined();
             });
 
@@ -141,7 +147,6 @@ describe("provider: common verifications", () => {
             expect(C8oExceptionMessage.unknownValue("valName", "val")).toBe("The valName value val is unknown");
             expect(C8oExceptionMessage.unknownType("valName", "val")).toBe("The valName type " + C8oUtils.getObjectClassName("val") + "is unknown");
             expect(C8oExceptionMessage.ressourceNotFound("ress")).toBe("The ress was not found");
-            expect(C8oExceptionMessage.toDo()).toBe("TODO");
             expect(C8oExceptionMessage.illegalArgumentInvalidFullSyncDatabaseUrl("http://fakeurl.com")).toBe("The fullSync database url 'http://fakeurl.com' is not a valid url");
             expect(C8oExceptionMessage.FullSyncDatabaseInitFailed("dbname")).toBe( "Failed to initialize the FullSync database 'dbname'");
             expect(C8oExceptionMessage.MissParameter("paramName")).toBe("The parameter 'paramName' is missing");
@@ -192,7 +197,6 @@ describe("provider: common verifications", () => {
             C8oExceptionMessage.unhandledListenerType("a");
             C8oExceptionMessage.WrongListener(new C8oResponseJsonListener((JSON, Object) => {}));
             C8oExceptionMessage.wrongResult("a");
-            C8oExceptionMessage.todo();
             C8oExceptionMessage.unhandledFullSyncRequestable("a");
             C8oExceptionMessage.closeInputStream();
             C8oExceptionMessage.deserializeJsonObjectFromString("a");

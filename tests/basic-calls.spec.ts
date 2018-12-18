@@ -6,9 +6,14 @@ import {C8o} from "../src/c8o/c8o.service";
 import {Functions, Info, Stuff} from "./utils.help";
 
 describe("provider: basic calls verifications", () => {
+    var originalTimeout;
     beforeEach(() => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000000;
+        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 500000;
     });
+    afterEach(function() {
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+      });
 /**/
     it("should get a bad request endpoint (C8oBadRequestEndpoint)", (done) => {
         const c8o = new C8o();
