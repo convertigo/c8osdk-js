@@ -135,7 +135,7 @@ describe("provider: common verifications", () => {
         }, 5000);
 
     });
-/**/
+
     it("should verify C8oExceptionMessages (C8oExceptionsMessages)", function(done) {
             new C8oRessourceNotFoundException("a", new Error("abc"));
             expect(C8oExceptionMessage.notImplementedFullSyncInterface()).toBe("You are using the default FullSyncInterface which is not implemented");

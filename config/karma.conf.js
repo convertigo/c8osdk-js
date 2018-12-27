@@ -2,10 +2,10 @@ module.exports = function(config) {
     var testWebpackConfig = require('./webpack.test.js');
 
     var configuration = {
-        captureTimeout: 500000,
+        captureTimeout: 300000,
         browserDisconnectTolerance: 3,
-        browserDisconnectTimeout : 500000,
-        browserNoActivityTimeout : 500000,
+        browserDisconnectTimeout : 300000,
+        browserNoActivityTimeout : 300000,
         basePath: '',
 
         frameworks: ['jasmine'],
