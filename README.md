@@ -24,6 +24,8 @@
 - [Documentation](#documentation)
   - [Creating a C8o instance](#creating-a-c8o-instance)
   - [Advanced instance settings](#advanced-instance-settings)
+    - [General](#general)
+    - [Normalize parameters](#normalize-parameters)
   - [Calling a Convertigo requestable](#calling-a-convertigo-requestable)
   - [Calling a Convertigo requestable with parameters](#calling-a-convertigo-requestable-with-parameters)
   - [Calling a Convertigo requestable uploading a files](#calling-a-convertigo-requestable-uploading-a-files)
@@ -105,6 +107,7 @@ const c8o = new C8o()
 
 
 ### Advanced instance settings ###
+#### General ####
 The endpoint is the mandatory setting to get a C8o instance correctly initialized but there is additional settings through the C8oSettings class.
 
 A C8oSettings instance should be passed after the endpoint. Settings are copied inside the C8o instance and a C8oSettings instance can be modified and reused.
@@ -117,7 +120,7 @@ In order to finish the c8o initialization you must use init method from c8o obje
 
 ```javascript
 import { C8o, C8oSettings } from "c8osdkjs"
-…
+
 // The only way
 let settings: C8oSettings = new C8oSettings();
 settings
@@ -135,7 +138,24 @@ c8o.finalizeInit().then(() => {
 // all settings can be retrieve from a C8o or C8oSettings instance
 let timeout : number = c8o.timeout;
 ```
+#### Normalize parameters ####
 
+If you want to normalize parameters of every call you can set it throw  C8osettings setNormalizeParameters method.
+setNormalizeParameters
+
+```javascript
+import { C8o, C8oSettings } from "c8osdkangular";
+
+// The only way
+let settings: C8oSettings = new C8oSettings();
+settings
+        .setNormalizeParameters(true);
+//Then we need to assign C8oSettings object to our C8o object
+c8o.init(settings);
+
+// all settings can be retrieve from a C8o or C8oSettings instance
+let normalizeParameters : boolean = c8o.normalizeParameters;
+```
 ### Calling a Convertigo requestable ###
 
 With a C8o instance you can call Convertigo Sequence and Transaction or make query to your local FullSync database.
@@ -158,6 +178,21 @@ this.c8o.callJson(".login")
    .then((response)=>{
      //handle result
    });
+
+// Using RxJS Observables that allow for example progress and Live. 
+this.c8o.callJson(".login")
+    .toObservable()
+    .subscribe(next => {
+        // handle results
+        // console.log(next.response);
+        //console.log(next.parameters)
+    },
+    error =>{
+        // handle errors
+    },
+    () =>{
+      // handle complete
+    });
 
 // Using C8oPromise that allow for example progress and Live. C8oPromise is described in Api doc in section Api documentation of this README
 this.c8o.callJson(".login")
@@ -294,7 +329,23 @@ this.c8o.callJson('.login', {
            })
            .catch((error)=>{
              // Do something with the error
-           })
+           });
+
+
+// Here using Rxjs Observables
+this.c8o.callJson(".login")
+    .toObservable()
+    .subscribe(next => {
+        // handle results
+        // console.log(next.response);
+        //console.log(next.parameters)
+    },
+    error =>{
+        // handle errors
+    },
+    () =>{
+      // handle complete
+    });
 
 // Using C8oPromise that allow for example progress and Live. C8oPromise is described in Api doc in section Api documentation of this README.
 this.c8o.callJson('.login', {
@@ -461,7 +512,7 @@ let resultGet = await this.c8o.callJson("fs://base.get", "docid", id, "attachmen
 let resultInfo = await this.c8o.callJson("fs://base.info").async();
 
 // Bulk load of database with an url as data argument
-let resultBulk = await this.c8o.callJson("fs://base.bulk", "data", "http://myurl.com/dump.json");
+let resultBulk = await this.c8o.callJson("fs://base.bulk", "data", "http://myurl.com/dump.json").async();
 ```
 
 ### Replicating Full Sync databases
