@@ -180,7 +180,7 @@ describe("provider: fullsync verifications", () => {
 
         },
     );
-/*
+/** */
     it("should check that Fullsync Post on existing is not working(C8oFsPostExisting)", function(done) {
             const c8o: C8o = new C8o();
             c8o.init(Stuff.C8o_FS).catch((err: C8oException) => {
@@ -690,14 +690,17 @@ describe("provider: fullsync verifications", () => {
             let valueN: number;
             c8o.callJson(".InitFsPull")
                 .then((response: any) => {
+                    console.log("0");
                     expect(response["document"]["ok"]).toBeTruthy();
                     return c8o.callJson("fs://.reset");
                 })
                 .then((response: any) => {
+                    console.log("1");
                     expect(response["ok"]).toBeTruthy();
                     return c8o.callJson("fs://.replicate_pull");
                 })
                 .then((responses: any) => {
+                    console.log("2");
                     expect(responses["ok"]).toBeTruthy();
                     return c8o.callJson("fs://.view",
                         "ddoc", "design",
@@ -734,6 +737,7 @@ describe("provider: fullsync verifications", () => {
                     return c8o.callJson("fs://.replicate_pull");
                 })
                 .then((response: any) => {
+                    console.log("3");
                     expect(response["ok"]).toBeTruthy();
                     return c8o.callJson("fs://.view",
                         "ddoc", "design",
@@ -753,6 +757,7 @@ describe("provider: fullsync verifications", () => {
                     return c8o.callJson("fs://.post", "_id", "111", "data", "16");
                 })
                 .then((response: any) => {
+                    console.log("4");
                     expect(response["ok"]).toBeTruthy();
                     return c8o.callJson("fs://.view",
                         "ddoc", "design",

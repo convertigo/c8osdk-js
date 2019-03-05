@@ -79,20 +79,28 @@ describe("provider: basic calls verifications", () => {
         });
     });
 
-    it("should ping Observable (C8oDefaultPingObservable)", (done) => {
+    it("should ping Observable (C8oDefaultPingObservable)", async (done) => {
         const c8o = new C8o();
         c8o.init(Stuff.C8o).catch((err: C8oException) => {
             expect(err).toBeUndefined();
         });
-        const observable = c8o.callJson(".Ping", "var1", "val1").toObservable();
-        observable.subscribe(
-            (response) => {
-                expect(response["document"]["pong"].var1).toBe("val1");
+        await c8o.finalizeInit();
+            var date2 = new Date('1995-12-17T02:24:00');
+            c8o.callJson(".Ping", "var1", "val1", "var2", date2)
+            .toObservable()
+            .subscribe(next => {
+                console.log("next");
+                console.log(next);
+                expect(next.response["document"]["pong"].var1).toBe("val1");
+                expect(next.response["document"]["pong"].var2.substring(0,10)).toBe('1995-12-17');
             },
-            (error) => {
+            error =>{
+                console.log("error");
+                console.log(error);
                 expect(error).toBeNull();
             },
-            () => {
+            () =>{
+                console.log("end");
                 done();
             });
     });
@@ -369,7 +377,7 @@ describe("provider: basic calls verifications", () => {
     it("should check that a promise could be nested (C8oDefaultPromiseNested)", (done) => {
             const c8o = new C8o();
             c8o.init(Stuff.C8o).catch((err: C8oException) => {
-                expect(err).toBeUndefined();
+                done.fail("error is not supposed to happend 1");
             });
             const xjson: any[] = [];
             c8o.callJson(".Ping", "var1", "step 1").then((response0: any) => {
@@ -399,7 +407,7 @@ describe("provider: basic calls verifications", () => {
                 done();
                 return null;
             }).fail(() => {
-                done.fail("error is not supposed to happend");
+                
             });
         },
     );

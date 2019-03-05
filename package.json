@@ -43,7 +43,7 @@
   "dependencies": {
     "@types/pouchdb": "6.3.2",
     "axios": "0.18.0",
-    "c8osdkjscore": "1.0.6",
+    "c8osdkjscore": "1.0.7-beta5",
     "pouchdb-browser": "6.4.3",
     "rxjs": "5.5.10"
   },
