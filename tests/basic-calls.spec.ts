@@ -14,7 +14,7 @@ describe("provider: basic calls verifications", () => {
     afterEach(function() {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
       });
-/**/
+/**
     it("should get a bad request endpoint (C8oBadRequestEndpoint)", (done) => {
         const c8o = new C8o();
 
@@ -40,7 +40,7 @@ describe("provider: basic calls verifications", () => {
             done()
         });
     });
-
+*/
     it("should ping (C8oDefaultPing)", (done) => {
         const c8o = new C8o();
         c8o.init(Stuff.C8o).catch((err: C8oException) => {
@@ -58,7 +58,7 @@ describe("provider: basic calls verifications", () => {
             done.fail("error is not supposed to happend");
         });
     });
-
+/*
     it("should ping async (C8oDefaultPingAsync)", (done) => {
         const c8o = new C8o();
         (async (): Promise<any> => {

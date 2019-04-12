@@ -17,7 +17,7 @@ describe("provider: fullsync verifications", () => {
     afterEach(function() {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
       });
-/**/
+/**
     it("should check that Fullsync Post Get Delete works (C8oFsPostGetDelete)", function(done) {
             const c8o: C8o = new C8o();
             c8o.init(Stuff.C8o_FS).catch((err: C8oException) => {
@@ -180,7 +180,7 @@ describe("provider: fullsync verifications", () => {
 
         },
     );
-/** */
+/** 
     it("should check that Fullsync Post on existing is not working(C8oFsPostExisting)", function(done) {
             const c8o: C8o = new C8o();
             c8o.init(Stuff.C8o_FS).catch((err: C8oException) => {
@@ -1365,7 +1365,7 @@ describe("provider: fullsync verifications", () => {
         });
     });
 
-   /**/
+   /**
 it("should check that Fullsync bulkworks (C8oFsBulk)", function (done) {
     const c8o: C8o = new C8o();
     c8o.init(Stuff.C8o_FS_FILES).catch((err: C8oException) => {
