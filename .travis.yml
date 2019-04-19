@@ -31,3 +31,10 @@ before_script:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  - curl -s -c /tmp/cookies "https://ci-develop.convertigo.net/convertigo/admin/services/engine.CheckAuthentication"
+  - curl -b /tmp/cookies -s "https://ci-develop.convertigo.net/convertigo/admin/services/engine.GetStatus"
+  - export BUILD_VERSION=$(curl -b /tmp/cookies -s "https://ci-develop.convertigo.net/convertigo/admin/services/engine.GetStatus" | sed -n -e "s,.*build.*version=\"\(.*\)\".*,\\1,p")
+
+addons:
+  artifacts:
+    target_paths: convertigo-$BUILD_VERSION/qualif/c8osdk-js
